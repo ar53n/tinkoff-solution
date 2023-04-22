@@ -17,12 +17,13 @@ fastify.post("/api/cost", async (request, reply) => {
     const doxodRegexp = RegExp(`(Прибыль|Доход)(:?)`, "gi");
     let str = "";
     const text = JSON.parse(request.body).text;
-    console.log(text);
     const words = text.split(`\n`);
+    console.log(words);
     for (let i = 0; i < words.length; i++) {
       const word = words[i];
-      if (word === "\n") {
+      if (word === "") {
         str = "";
+        continue
       }
       if (word.match(rasxodRegexp)) {
         str = "rasxod";
